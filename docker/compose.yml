@@ -1,0 +1,40 @@
+version: '3.7'
+
+services:
+  mongodb:
+    image: mongo:4.4.9
+    ports:
+      - "27017:27017"
+
+  mongodb-exporter:
+    image: percona/mongodb_exporter:0.40.0
+    depends_on:
+        - mongodb
+    ports:
+      - "9216:9216"
+    command: --mongodb.uri=mongodb://mongodb:27017 --log.level=debug
+
+  dummy:
+    image: prometheus-spring-demo
+    depends_on:
+      - mongodb
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_PROFILES_ACTIVE=test
+
+  prometheus:
+    image: prom/prometheus:v2.53.1
+    container_name: prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus/config.yml:/etc/prometheus/prometheus.yml
+
+  grafana:
+    image: grafana/grafana:11.1.0
+    container_name: grafana
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./grafana/datasources.yml:/etc/grafana/provisioning/datasources/datasources.yml

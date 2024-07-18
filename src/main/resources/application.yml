@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: prometheus-spring-demo
+  data:
+    mongodb:
+      auto-index-creation: true
+      uri: mongodb://localhost:27017/test
+management:
+  endpoints:
+    web:
+      exposure:
+        include: ["prometheus"]

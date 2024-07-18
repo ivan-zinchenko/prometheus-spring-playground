@@ -1,0 +1,17 @@
+### dummy 200
+GET http://127.0.0.1:8080/dummy/200
+
+### dummy 404
+GET http://127.0.0.1:8080/dummy/404
+
+### dummy 999
+GET http://127.0.0.1:8080/dummy/999
+
+### get all users
+GET http://127.0.0.1:8080/users
+
+### add user
+POST http://127.0.0.1:8080/users/peter
+
+### delete user
+DELETE http://127.0.0.1:8080/users/john
