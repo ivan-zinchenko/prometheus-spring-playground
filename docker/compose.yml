@@ -12,7 +12,7 @@ services:
         - mongodb
     ports:
       - "9216:9216"
-    command: --mongodb.uri=mongodb://mongodb:27017 --log.level=debug
+    command: --mongodb.uri=mongodb://mongodb:27017 --collect-all --log.level=debug
 
   dummy:
     image: prometheus-spring-demo
